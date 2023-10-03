@@ -20,11 +20,11 @@ def cadastro(request):
              return redirect('/usuarios/cadastro')
          if len(senha) < 6:
              messages.add_message(request, constants.ERROR, 'Sua senha deve ter 7 ou mais dígitos')
-             return redirect('usuarios/cadastro')
+             return redirect('/usuarios/cadastro')
         
          try:
              #TODO: Validade se o username do usuário não existe
-             ser = User.objects.create_user(
+             user = User.objects.create_user(
              first_name=primeiro_nome,
              last_name=ultimo_nome,
              username=username,
