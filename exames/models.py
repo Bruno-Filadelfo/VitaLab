@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class TiposExames(models.Model):
     tipo_choices = (
@@ -13,6 +13,21 @@ class TiposExames(models.Model):
     horario_inicial = models.IntegerField()
     horario_final = models.IntegerField()
 
-    def _str_(self):
+    def __str__(self):
         return self.nome
+
+class SolicitacaoExame(models.Model):
+    choice_status = (
+      ('E', 'Em análise'),
+      ('F', 'Finalizado')
+    )
+    usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    exame = models.ForeignKey(TiposExames, on_delete=models.DO_NOTHING)
+    status = models.CharField(max_length=2, choices=choice_status)
+    resultado = models.FileField(upload_to="resultados", null=True, blank=True)
+    requer_senha = models.BooleanField(default=False)
+    senha = models.CharField(max_length=16, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.usuario} | {self.exame.nome}'       
 
