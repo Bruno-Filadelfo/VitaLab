@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User 
 from django.contrib.messages import constants
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 def cadastro(request):
     if request.method == "GET":
@@ -38,11 +39,19 @@ def cadastro(request):
 
          return redirect('Passou') 
     
-def login(request):
+def logar(request):
     if request.method == "GET":
         return render(request, 'login.html')
     elif request.method == "POST":
         username = request.POST.get('username')
         senha = request.POST.get('senha')
 
-        return HttpResponse(f'{username} - {senha}')
+        user = authenticate(username=username, password=senha)
+
+        if user:
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.add_message(request, constants.ERROR, 'Usernames ou senha inválidos')   
+            return redirect('/usuarios/login')
+               
