@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def solicitar_exames(request):
-    if not (request.user.is_authenticated):
-        return  HttpResponse("Você não pode acessar aqui")
-    return HttpResponse('Estou aqui')
+    if request.method == "GET":
+       return render(request, 'solicitar_exames.html')
 
