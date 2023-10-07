@@ -5,8 +5,8 @@ from .models import TiposExames
 
 @login_required
 def solicitar_exames(request):
+    tipos_exames = TiposExames.objects.all()
     if request.method == "GET":
-       tipos_exames = TiposExames.objects.all()
        return render(request, 'solicitar_exames.html', {'tipos_exames': tipos_exames})
     elif request.method == "POST":
         exames_id = request.POST.getlist('exames')
@@ -18,4 +18,4 @@ def solicitar_exames(request):
         for i in solicitacao_exames:
             preco_total += i.preco
             
-        return render(request, 'solicitar_exames.html', {'tipos_exames': tipos_exames})
+        return render(request, 'solicitar_exames.html', {'tipos_exames': tipos_exames, 'solicitacao_exames': solicitacao_exames, 'preco_total': preco_total})

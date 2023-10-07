@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md">
             <h3 class="font-destaque">Solicitar exames</h3>
-          
+
             <form action="{% url 'solicitar_exames' %}" method="POST">{% csrf_token %}
                 <label for="">Selecione os exames para realizar</label>
                 <select class="select form-control bg-select" multiple name="exames">
@@ -26,16 +26,21 @@
         <div class="col-md-2">
         </div>
         <div class="col-md card">
+
+            {% for exame in solicitacao_exames %}
             <div style="font-size: 20px; font-weight: bold">
-                <img src="{% static 'exames/img/check.png' %}">
-                Exame 1
+                <i class="fa fa-check-square" aria-hidden="true" style="color: green;"></i>
+                
+                {{exame.nome}}
                 <span class="previa-preco">
-                    R$ 30
+                    R$ {{exame.preco}}
                 </span>
             </div>
+            {% endfor %}
+
             <hr style="color: white;">
             <div>
-                <label>Total: </label><label class="previa-preco">R$ 30</label>
+                <label>Total: </label><label class="previa-preco">R$ {{preco_total}}</label>
             </div>
             <br>
             <h5>Data: 08 de Setembro</h5>
