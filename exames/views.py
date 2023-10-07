@@ -16,6 +16,7 @@ def solicitar_exames(request):
         
         preco_total = 0
         for i in solicitacao_exames:
-            preco_total += i.preco
+            if i.disponivel:
+               preco_total += i.preco
             
         return render(request, 'solicitar_exames.html', {'tipos_exames': tipos_exames, 'solicitacao_exames': solicitacao_exames, 'preco_total': preco_total})
