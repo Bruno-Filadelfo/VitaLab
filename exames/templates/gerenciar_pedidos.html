@@ -8,40 +8,52 @@
 <br>
 <br>
 <div class="container">
-{% if messages %}
-<br>
-{% for message in messages %}
-<div class="alert {{ message.tags }}">{{ message }}</div>
-{% endfor %}
-{% endif %}
-<div class="card card-view">
-<table>
-<tr>
-<th>Solicitação</th>
-<th>Data</th>
-<th>Exames</th>
-<th>Ação</th>
-</tr>
-{% for pedidos in pedidos_exames %}
-<tr class="linha-tabela">
-<td>{{pedidos.id}}</td>
-<td>{{pedidos.data}}</td>
-<td>
-<select class="form-select">
-{% for exame in pedidos.exames.all %}
-<option style="color: black" value="">{{exame.exame.nome}}</option>
-{% endfor %}
-</select>
-</td>
-<td>
-<a href="" class="btn btn-danger {% if not pedidos.agendado %} disabled {% endif %}">Cancelar</a>
-</td>
-</tr
-{% endfor %}
-</table>
-</div>
+    {% if messages %}
+    <br>
+    {% for message in messages %}
+    <div class="alert {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    <div class="card card-view">
+        <table>
+            <tr>
+                <th>Solicitação</th>
+                <th>Data</th>
+                <th>Exames</th>
+                <th>Ação</th>
+            </tr>
+            {% for pedidos in pedidos_exames %}
+            <tr class="linha-tabela">
+                <td>1{{pedidos.id}}</td>
+                <td>data{{pedidos.data}}</td>
+                <td>
+                    <select class="form-select">
+                        {% for exame in pedidos.exames.all %}
+                        <option style="color: black" value="">{{exame.exame.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <a href="" class="btn btn-danger {% if not pedidos.agendado %} disabled {% endif %}">Cancelar</a>
+                </td>
+            </tr>
+             {% endfor %} 
+            <tr class="linha-tabela">
+                <td>1{{pedidos.id}}</td>
+                <td>data{{pedidos.data}}</td>
+                <td>
+                    <select class="form-select">
+                        {% for exame in pedidos.exames.all %}
+                        <option style="color: black" value="">{{exame.exame.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <a href="" class="btn btn-danger {% if not pedidos.agendado %} disabled {% endif %}">Cancelar</a>
+                </td>
+            </tr>
+             
+            </table>
+    </div>
 </div>
 {% endblock 'conteudo' %}
-
-
-

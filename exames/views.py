@@ -52,4 +52,5 @@ def fechar_pedido(request):
     return redirect('/exames/gerenciar_pedidos/')
 
 def gerenciar_pedidos(request):
+    
     return render(request, 'gerenciar_pedidos.html')
