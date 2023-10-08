@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import TiposExames, PedidosExames, SolicitacaoExame
 from datetime import datetime
+from django.contrib import messages
+from django.contrib.messages import constants
 
 
 @login_required
@@ -31,7 +33,7 @@ def solicitar_exames(request):
             },
         )
 
-
+@login_required
 def fechar_pedido(request):
     exames_id = request.POST.getlist("exames")
     solicitacao_exames = TiposExames.objects.filter(id__in=exames_id)
@@ -43,4 +45,11 @@ def fechar_pedido(request):
             usuario=request.user, exame=exame, status="E"
         )
         solicitacao_exames_temp.save()
-    return HttpResponse("estou aqui")
+        pedido_exame.exames.add(solicitacao_exames_temp)
+
+    pedido_exame.save()    
+    messages.add.messages(request, constants.SUCCESS, 'Pedido de exame realizado com sucesso')
+    return redirect('/exames/gerenciar_pedidos/')
+
+def gerenciar_pedidos(request):
+    return render(request, 'gerenciar_pedidos.html')
