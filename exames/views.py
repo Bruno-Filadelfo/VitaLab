@@ -53,7 +53,6 @@ def fechar_pedido(request):
 
 def gerenciar_pedidos(request):
     pedidos_exames = PedidosExames.objects.filter(usuario=request.user)
-    
     return render(request, 'gerenciar_pedidos.html', {'pedidos_exames': pedidos_exames})
 
 def cancelar_pedido(request, pedido_id):
