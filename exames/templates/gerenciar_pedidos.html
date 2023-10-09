@@ -22,14 +22,16 @@
                 <th>Exames</th>
                 <th>Ação</th>
             </tr>
+
             {% for pedidos in pedidos_exames %}
+
             <tr class="linha-tabela">
-                <td>1{{pedidos.id}}</td>
-                <td>data{{pedidos.data}}</td>
+                <td>{{pedidos.id}}</td>
+                <td>{{pedidos.data}}</td>
                 <td>
                     <select class="form-select">
                         {% for exame in pedidos.exames.all %}
-                        <option style="color: black" value="">{{exame.exame.nome}}</option>
+                            <option style="color: black" value="">{{exame.exame.nome}}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -37,23 +39,10 @@
                     <a href="" class="btn btn-danger {% if not pedidos.agendado %} disabled {% endif %}">Cancelar</a>
                 </td>
             </tr>
-             {% endfor %} 
-            <tr class="linha-tabela">
-                <td>1{{pedidos.id}}</td>
-                <td>data{{pedidos.data}}</td>
-                <td>
-                    <select class="form-select">
-                        {% for exame in pedidos.exames.all %}
-                        <option style="color: black" value="">{{exame.exame.nome}}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-                <td>
-                    <a href="" class="btn btn-danger {% if not pedidos.agendado %} disabled {% endif %}">Cancelar</a>
-                </td>
-            </tr>
-             
-            </table>
+
+            {% endfor %}
+
+        </table>
     </div>
 </div>
 {% endblock 'conteudo' %}
