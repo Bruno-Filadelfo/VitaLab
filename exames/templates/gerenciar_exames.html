@@ -6,26 +6,32 @@
 <br />
 <br />
 <div class="container">
-    {% if messages %}
-    <br />
-    PSW 8.0 | Aula 2 7 {% for message in messages %}
-    <div class="alert {{ message.tags }}">{{ message }}</div>
-    {% endfor %} {% endif %}
-    <div class="card card-view">
-        <div class="sub-card">
-            <h3>Exames de sangue</h3>
-            <hr />
-            <br />
-            LISTAR EXAMES AQUI
-        </div>
-        <br />
-        <br />
-        <div class="sub-card">
-            <h3>Exames de imagem</h3>
-            <hr />
-            <br />
-            LISTAR EXAMES AQUI
-        </div>
+  {% if messages %}
+  <br />
+  {% for message in messages %}
+  <div class="alert {{ message.tags }}">{{ message }}</div>
+  {% endfor %} 
+  {% endif %}
+  <div class="card card-view">
+
+    <div class="sub-card">
+      <h3>Exames de sangue</h3>
+      <hr />
+      <br />
+      {% for exame in exames %}
+            {% if exame.exame.tipo == 'S'%}
+                {{exame}}
+            {% endif %}
+       {% endfor %}         
     </div>
+    <br />
+    <br />
+    <div class="sub-card">
+      <h3>Exames de imagem</h3>
+      <hr />
+      <br />
+      LISTAR EXAMES AQUI
+    </div>
+  </div>
 </div>
 {% endblock 'conteudo' %}
