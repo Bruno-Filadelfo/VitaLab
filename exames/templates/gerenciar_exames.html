@@ -20,6 +20,11 @@
       <br />
       {% for exame in exames %}
             {% if exame.exame.tipo == 'S'%}
+            <div class="row">
+                <div class="col-md">{{exame.exame.nome}}</div>
+                <div class="col-md"></div>
+                <div class="col-md"></div>
+            </div>
                 {{exame}}
             {% endif %}
        {% endfor %}         
