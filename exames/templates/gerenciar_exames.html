@@ -1,13 +1,18 @@
-{% extends "bases/base.html" %} {% load static %} {% block 'head' %}
+{% extends "bases/base.html" %} 
+{% load static %} 
+
+{% block 'head' %}
 <link href="{% static 'exames/css/css.css' %}" rel="stylesheet" />
 <link href="{% static 'exames/css/gerenciar_pedidos.css' %}" rel="stylesheet" />
 <link href="{% static 'exames/css/gerenciar_exames.css' %}" rel="stylesheet" />
-{% endblock 'head' %} {% block 'conteudo' %}
-<br />
-<br />
+{% endblock 'head' %} 
+
+{% block 'conteudo' %}
+<br>
+<br>
 <div class="container">
   {% if messages %}
-  <br />
+  <br>
   {% for message in messages %}
   <div class="alert {{ message.tags }}">{{ message }}</div>
   {% endfor %} 
@@ -16,14 +21,14 @@
 
     <div class="sub-card">
       <h3>Exames de sangue</h3>
-      <hr />
-      <br />
+      <hr>
+      <br>
       {% for exame in exames %}
             {% if exame.exame.tipo == 'S'%}
             <div class="row">
-                <div class="col-md">{{exame.exame.nome}}</div>
+                <div class="col-md"><h3>{{exame.exame.nome}}<h3></div>
                 <div class="col-md"></div>
-                <div class="col-md"></div>
+                <div class="co l-md"></div>
             </div>
                 {{exame}}
             {% endif %}
@@ -33,8 +38,8 @@
     <br />
     <div class="sub-card">
       <h3>Exames de imagem</h3>
-      <hr />
-      <br />
+      <hr>
+      <br>
       LISTAR EXAMES AQUI
     </div>
   </div>

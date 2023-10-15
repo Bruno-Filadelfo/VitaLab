@@ -6,9 +6,9 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.messages import constants
 
-
 @login_required
 def solicitar_exames(request):
+
     tipos_exames = TiposExames.objects.all()
     if request.method == "GET":
         return render(request, "solicitar_exames.html", {"tipos_exames": tipos_exames})
@@ -35,9 +35,11 @@ def solicitar_exames(request):
 
 @login_required
 def fechar_pedido(request):
-    exames_id = request.POST.getlist("exames")
+    exames_id = request.POST.getlist('exames')
     solicitacao_exames = TiposExames.objects.filter(id__in=exames_id)
+
     pedido_exame = PedidosExames(usuario=request.user, data=datetime.now())
+
     pedido_exame.save()
 
     for exame in solicitacao_exames:
@@ -47,8 +49,8 @@ def fechar_pedido(request):
         solicitacao_exames_temp.save()
         pedido_exame.exames.add(solicitacao_exames_temp)
 
-    pedido_exame.save()    
-    messages.add.message(request, constants.SUCCESS, 'Pedido de exame realizado com sucesso.')
+    pedido_exame.save()      
+    messages.add_message(request, constants.SUCCESS, 'Pedido de exame realizado com sucesso.')
     return redirect('/exames/gerenciar_pedidos/')
 
 @login_required
@@ -60,7 +62,7 @@ def gerenciar_pedidos(request):
 def cancelar_pedido(request, pedido_id):
     pedido = PedidosExames.objects.get(id=pedido_id)
 
-    if not pedido.usuario == request .user:
+    if not pedido.usuario == request.user:
         messages.add_message(request, constants.ERROR, 'Esse pedido não é seu, portanto você não pode cancelar.')
         return redirect('/exames/gerenciar_pedidos/')
     pedido.agendado = False
