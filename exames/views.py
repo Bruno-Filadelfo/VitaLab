@@ -76,3 +76,11 @@ def gerenciar_exames(request):
     exames = SolicitacaoExame.objects.filter()
     print(exames)
     return render(request, 'gerenciar_exames.html', {'exames':exames})  
+
+def permitir_abrir_exame(request, exame_id):
+    exame=SolicitacaoExame.objects.get(id=exame_id)
+
+    if not exame.requer_senha:
+        return redirect(exame.resultado.url)
+        
+    return HttpResponse(exame_id)    
