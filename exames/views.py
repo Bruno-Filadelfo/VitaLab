@@ -81,6 +81,7 @@ def permitir_abrir_exame(request, exame_id):
     exame=SolicitacaoExame.objects.get(id=exame_id)
 
     if not exame.requer_senha:
+        #TODO: verificar se tem o PDF do resultado
         return redirect(exame.resultado.url)
-        
+
     return HttpResponse(exame_id)    
