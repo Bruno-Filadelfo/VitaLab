@@ -31,9 +31,14 @@
                     {{exame.badge_template}}
                 </div>
                 <div class="col-md">
-                  <a href="#" class="btn btn-light">Abrir</a>
+                  {% if exame.status == 'F' %}
+                      <a href="{{exame.resultado.url}}" class="btn btn-light">Abrir</a>
+                  {% else %}    
+                      <a href="#" class="btn btn-light disabled">Abrir</a>
+                  {% endif %}
                 </div>
             </div>
+            <br>
             {% endif %}
        {% endfor %}         
     </div>
