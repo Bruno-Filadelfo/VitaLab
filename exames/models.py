@@ -29,7 +29,17 @@ class SolicitacaoExame(models.Model):
     senha = models.CharField(max_length=16, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.usuario} | {self.exame.nome}'       
+        return f'{self.usuario} | {self.exame.nome}'    
+
+    def badge_template(self):
+        if self.status == "E":
+            classes = 'bg-warning'
+            texto = "Em análise"
+        elif self.status == "F":
+            classes = 'bg-success'
+            texto = "Finalizado"
+
+        return f'<span class="badge {classes}">Primary</span>'
     
 class PedidosExames(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -39,5 +49,7 @@ class PedidosExames(models.Model):
     
     def __str__(self):
         return f'{self.usuario} | {self.data}'
+
+        
     
 

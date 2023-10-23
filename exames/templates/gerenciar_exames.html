@@ -27,10 +27,11 @@
             {% if exame.exame.tipo == 'S'%}
             <div class="row">
                 <div class="col-md"><h3>{{exame.exame.nome}}<h3></div>
+                <div class="col-md">
+                    {{exame.badge_template}}
+                </div>
                 <div class="col-md"></div>
-                <div class="co l-md"></div>
             </div>
-                {{exame}}
             {% endif %}
        {% endfor %}         
     </div>
@@ -44,6 +45,7 @@
   </div>
 </div>
 {% endblock 'conteudo' %}
+
 
 
 
