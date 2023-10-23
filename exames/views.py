@@ -73,5 +73,6 @@ def cancelar_pedido(request, pedido_id):
 
 @login_required
 def gerenciar_exames(request):
-    exames = SolicitacaoExame.objects.filter(usuario=request.user)
+    exames = SolicitacaoExame.objects.filter()
+    print(exames)
     return render(request, 'gerenciar_exames.html', {'exames':exames})  
