@@ -77,6 +77,7 @@ def gerenciar_exames(request):
     print(exames)
     return render(request, 'gerenciar_exames.html', {'exames':exames})  
 
+@login_required
 def permitir_abrir_exame(request, exame_id):
     exame=SolicitacaoExame.objects.get(id=exame_id)
 
@@ -84,4 +85,9 @@ def permitir_abrir_exame(request, exame_id):
         #TODO: verificar se tem o PDF do resultado
         return redirect(exame.resultado.url)
 
-    return HttpResponse(exame_id)    
+    return redirect(f'/exames/solicitar_senha_exames/{exame_id}')   
+
+@login_required
+def solicitar_senha_exame(request, exame_id):
+    if request.method == "GET":
+        return render(request, 'solicitar_senha_exame.html')
