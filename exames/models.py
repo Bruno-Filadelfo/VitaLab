@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
+
 # Create your models here.
 class TiposExames(models.Model):
     tipo_choices = (
@@ -33,13 +35,13 @@ class SolicitacaoExame(models.Model):
 
     def badge_template(self):
         if self.status == "E":
-            classes = 'bg-warning'
+            classes = 'bg-warning text-dark '
             texto = "Em análise"
         elif self.status == "F":
             classes = 'bg-success'
             texto = "Finalizado"
 
-        return f'<span class="badge {classes}">Primary</span>'
+        return mark_safe (f'<span class="badge {classes}">{texto}</span>')
     
 class PedidosExames(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
