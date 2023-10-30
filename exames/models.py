@@ -73,11 +73,16 @@ class AcessoMedico(models.Model):
 
         super(AcessoMedico, self).save(*args, **kwargs)
 
+    @property
     def status(self):
         if timezone.now() > (self.criado_em + timedelta(hours=self.tempo_de_acesso)):
             return 'Expirado'
         else:
             return 'Ativo'    
+
+    @property
+    def url(self):
+        return f'https://127.0.0.1:8000/exames/acesso_medico/{self.token}'       
 
         
     
