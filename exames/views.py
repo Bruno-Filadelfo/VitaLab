@@ -101,6 +101,7 @@ def solicitar_senha_exame(request, exame_id):
             messages.add_message(request, constants.ERROR, 'Senha inválida.')
             return redirect(f'/exames/solicitar_senha_exame/{exame.id}')
 
+@login_required
 def gerar_acesso_medico(request):
     if request.method == "GET":
         acessos_medicos = AcessoMedico.objects.filter(usuario=request.user)
@@ -123,3 +124,10 @@ def gerar_acesso_medico(request):
 
         messages.add_message(request, constants.SUCCESS, 'Acesso gerado com sucesso')
         return redirect('/exames/gerar_acesso_medico')
+
+def acesso_medico(request, token):
+    acesso_medico = AcessoMedico.objects.get(token=token)
+    if acesso_medico.status == "Expirado":
+        messages.add_message(request, constants.ERROR, 'Esse token já expirou, solicite outro.')
+        return redirect('/usuarios/login')
+    return HttpResponse(acesso_medico.status)
