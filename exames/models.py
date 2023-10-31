@@ -82,7 +82,7 @@ class AcessoMedico(models.Model):
 
     @property
     def url(self):
-        return f'https://127.0.0.1:8000/exames/acesso_medico/{self.token}'       
+        return f'http://127.0.0.1:8000/exames/acesso_medico/{self.token}'       
 
         
     
