@@ -12,11 +12,18 @@
         <tr>
             <th>Id</th>
             <th>Exame</th>
+
         </tr>
-        <tr class="linha-tabela">
-            <td>Nome</td>
-            <td>Em análise</td>
-        </tr>
+
+        {% for pedido in pedidos %}
+        {% for exame in pedido.exames.all %}
+            <tr class="linha-tabela">
+                <td>{{pedido.}}</td>
+                <td>Em análise</td>
+            </tr>
+        {% endfor %}   
+    {% endfor %} 
+
     </table>
 </div>
 {% endblock 'conteudo' %}
