@@ -15,14 +15,13 @@
 
         </tr>
 
-        {% for pedido in pedidos %}
-        {% for exame in pedido.exames.all %}
+       {% for pedido in pedidos %}
             <tr class="linha-tabela">
-                <td>{{pedido.}}</td>
+                <td>Nome</td>
                 <td>Em análise</td>
             </tr>
-        {% endfor %}   
-    {% endfor %} 
+       {% endfor %}
+        
 
     </table>
 </div>
