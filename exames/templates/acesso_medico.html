@@ -16,10 +16,12 @@
         </tr>
 
        {% for pedido in pedidos %}
-            <tr class="linha-tabela">
-                <td>Nome</td>
-                <td>Em análise</td>
-            </tr>
+           {% for exame in pedido.exames.all %}
+               <tr class="linha-tabela">
+                   <td>{{exame.exame.nome}}</td>
+                   <td>Em análise</td>
+               </tr>
+           {% endfor %}
        {% endfor %}
         
 
