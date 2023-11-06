@@ -1,30 +1,27 @@
-{% extends "bases/base.html" %}
-{% load static %}
-{% block 'head' %}
-<link href="{% static 'exames/css/css.css' %}" rel="stylesheet">
-<link href="{% static 'exames/css/gerenciar_pedidos.css' %}" rel="stylesheet">
-{% endblock 'head' %}
-{% block 'conteudo' %}
-<br>
-<br>
+{% extends "bases/base.html" %} {% load static %} {% block 'head' %}
+<link href="{% static 'exames/css/css.css' %}" rel="stylesheet" />
+<link href="{% static 'exames/css/gerenciar_pedidos.css' %}" rel="stylesheet" />
+{% endblock 'head' %} {% block 'conteudo' %}
+<br />
+<br />
 <div class="container">
-    <table style="">
-        <tr>
-            <th>Id</th>
-            <th>Exame</th>
+  <table style="">
+    <tr>
+      <th>Id</th>
+      <th>Exame</th>
+    </tr>
 
-        </tr>
+    {% for pedido in pedidos %} {% for exame in pedido.exames.all %}
+    <tr class="linha-tabela">
+      <td>{{exame.exame.nome}}</td>
 
-       {% for pedido in pedidos %}
-           {% for exame in pedido.exames.all %}
-               <tr class="linha-tabela">
-                   <td>{{exame.exame.nome}}</td>
-                   <td>Em análise</td>
-               </tr>
-           {% endfor %}
-       {% endfor %}
-        
-
-    </table>
+      {% if exame.resultado %}
+      <td><a href="#" class="btn-secundario">Ver exame</a></td>
+      {% else %}
+      <td>Em análise</td>
+      {% endif %}
+    </tr>
+    {% endfor %} {% endfor %}
+  </table>
 </div>
 {% endblock 'conteudo' %}
