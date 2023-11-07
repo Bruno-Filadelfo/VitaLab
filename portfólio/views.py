@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.functions import Concat
 from django.db.models import Value
 from django.contrib.admin.views.decorators import staff_member_required
+from exames.models import SolicitacaoExame
 
 @staff_member_required
 def gerenciar_clientes(request):
