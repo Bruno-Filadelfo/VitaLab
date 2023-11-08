@@ -25,3 +25,7 @@ def cliente(request, cliente_id):
     cliente = User.objects.get(id=cliente_id)
     exames = SolicitacaoExame.objects.filter(usuario=cliente)
     return render(request, 'cliente.html', {'cliente': cliente, 'exames': exames})
+
+def exame_cliente(request, exame_id):
+    exame = SolicitacaoExame.objects.get(id=exame_id)
+    return render(request, 'exame_cliente.html', {'exame': exame})    
