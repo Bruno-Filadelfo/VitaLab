@@ -25,8 +25,8 @@
                     <br>
                     <br>
                     {% if exame.resultado %}
-                    <a style="width: 100%;" href="" target="__blank">
-                        <div style="width: 100%;" id="pdf-container">Seu exame aqui</div>
+                    <a style="width: 100%;" href="{{exame.resultado.url}}" target="__blank">
+                        <div style="width: 100%;" id="pdf-container"></div>
                     </a>
                     {% endif %}
             </div>
@@ -52,7 +52,7 @@
 
    const container = document.getElementById('pdf-container');
 
-   pdfjsLib.getDocument('').promise.then(pdf => {
+   pdfjsLib.getDocument("{% url 'proxy_pdf' exame.id %}").promise.then(pdf => {
        pdf.getPage(1).then(page => {
            const canvas = document.createElement('canvas');
            const context = canvas.getContext('2d');
@@ -66,7 +66,7 @@
            });
        });
    });
-   
+
 </script>
 
 {% endblock 'conteudo' %}

@@ -4,7 +4,7 @@ from django.db.models.functions import Concat
 from django.db.models import Value
 from django.contrib.admin.views.decorators import staff_member_required
 from exames.models import SolicitacaoExame
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 
 @staff_member_required
 def gerenciar_clientes(request):
@@ -34,6 +34,6 @@ def exame_cliente(request, exame_id):
 def proxy_pdf(request, exame_id):
     exame = SolicitacaoExame.objects.get(id=exame_id)
 
-    print('exame.resultado')
+    response = exame.resultado.open()
 
-    return HttpResponse('teste')
+    return HttpResponse(response)
