@@ -5,7 +5,7 @@ from django.db.models import Value
 from django.contrib.admin.views.decorators import staff_member_required
 from exames.models import SolicitacaoExame
 from django.http import HttpResponse, FileResponse
-from .utils import gerar_pdf_exames
+from .utils import gerar_pdf_exames, gerar_pdf_exames
 
 @staff_member_required
 def gerenciar_clientes(request):
@@ -43,6 +43,8 @@ def gerar_senha(request, exame_id):
     exame = SolicitacaoExame.objects.get(id=exame_id)
 
     if exame.senha:
-        return FileResponse(gerar_pdf_exames(exame.exame.nome, exame.usuario.first_name, exame.senha))
-
-    return HttpResponse('teste')    
+        return FileResponse(gerar_pdf_exames(exame.exame.nome, exame.usuario.first_name, exame.senha), filename="token.pdf")
+        
+    exame.senha = gerar_senha_aleatoria(9)
+    exame.save()
+    return FileResponse(gerar_pdf_exames(exame.exame.nome, exame.usuario.first_name, exame.senha), filename="token.pdf")
