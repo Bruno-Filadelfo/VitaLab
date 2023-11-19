@@ -37,7 +37,7 @@
                     <option style="color: black;" {% if exame.status == "F"%}selected{% endif %}  value="F">Finalizado</option>
                 </select>
                 <br>
-                <input type="checkbox" name="requer_senha" id=""><label for="">Requer senha para acessar ?</label>
+                <input type="checkbox" name="requer_senha" {% if exame_requer_senha %} checked {% endif %} id=""><label for="">Requer senha para acessar ?</label>
                 <br>
                 <br>
                 <input type="submit" value="Salvar" class="btn-default">
