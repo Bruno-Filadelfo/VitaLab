@@ -20,7 +20,7 @@
         <br>
         <div class="row">
             <div class="col-md-6">
-                <form action="" method="POST">
+                <form action="{% url 'alterar_dados_exame' exame.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <input type="FILE" value="Alterar PDF" class="btn-secundario" name="resultado">
                     <br>
                     <br>
@@ -37,7 +37,7 @@
                     <option style="color: black;" {% if exame.status == "F"%}selected{% endif %}  value="F">Finalizado</option>
                 </select>
                 <br>
-                <input type="checkbox" name="requer_senha" {% if exame_requer_senha %} checked {% endif %} id=""><label for="">Requer senha para acessar ?</label>
+                <input type="checkbox" name="requer_senha"  {% if exame.requer_senha %} checked {% endif %} id=""><label for="">Requer senha para acessar ?</label>
                 <br>
                 <br>
                 <input type="submit" value="Salvar" class="btn-default">

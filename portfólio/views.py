@@ -48,3 +48,7 @@ def gerar_senha(request, exame_id):
     exame.senha = gerar_senha_aleatoria(9)
     exame.save()
     return FileResponse(gerar_pdf_exames(exame.exame.nome, exame.usuario.first_name, exame.senha), filename="token.pdf")
+
+def alterar_dados_exame(request, exame_id):
+    exame = SolicitacaoExame.objects.get(id=exame_id)
+    return HttpResponse('Teste')

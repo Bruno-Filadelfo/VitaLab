@@ -34,7 +34,7 @@ class SolicitacaoExame(models.Model):
     senha = models.CharField(max_length=16, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.usuario} | {self.exame.nome}'    
+        return f'{self.id}{self.usuario} | {self.exame.nome}'    
 
     def badge_template(self):
         if self.status == "E":
