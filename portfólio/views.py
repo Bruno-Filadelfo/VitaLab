@@ -56,7 +56,7 @@ def alterar_dados_exame(request, exame_id):
 
     pdf = request.FILES.get('resultado')
     status = request.POST.get('status')
-    request_senha = request.POST.get('requer_senha')
+    requer_senha = request.POST.get('requer_senha')
 
     if  requer_senha and (not exame.senha):
         messages.add_message(request, constants.ERROR, 'Para exigir a senha, primeiro crie uma.')
@@ -68,4 +68,5 @@ def alterar_dados_exame(request, exame_id):
     exame.status = status
     exame.save()
     
-    return HttpResponse('Teste')
+    messages.add_message(request, constants.SUCCESS, 'Dados alterados com sucesso')
+    return redirect(f'/portfólio/exame_cliente/{exame_id}')
